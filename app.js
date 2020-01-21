@@ -5,6 +5,7 @@ const clearTasks = document.querySelector(".clear-tasks");
 const taskValue = document.querySelector("#task");
 
 addTask.addEventListener('click', addTaskEvent);
+tasks.addEventListener('click', removeTaskEvent);
 
 function addTaskEvent(e){
   if(taskValue.value === ''){
@@ -22,6 +23,19 @@ function addTaskEvent(e){
   // Adding the list item to the task list
   tasks.appendChild(taskItem);
   e.preventDefault();
+
+  //Setting the text value to null
+  taskValue.value = "";
+
+  }
+}
+
+//Removing the element
+function removeTaskEvent(e){
+  if(e.target.parentElement.classList.contains("delete-item")){
+    if(confirm("Are You Sure ?")){
+      e.target.parentElement.parentElement.remove();
+    }
   }
 }
 
