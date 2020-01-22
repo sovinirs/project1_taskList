@@ -4,10 +4,12 @@ const addTask = document.querySelector(".add-task");
 const clearTasks = document.querySelector(".clear-tasks");
 const taskValue = document.querySelector("#task");
 const clearEvents = document.querySelector(".clear-tasks");
+const filterTasks = document.querySelector("#filter");
 
 addTask.addEventListener('click', addTaskEvent);
 tasks.addEventListener('click', removeTaskEvent);
 clearEvents.addEventListener('click', clearEvent);
+filterTasks.addEventListener('keyup', filterEvent);
 
 function addTaskEvent(e){
   if(taskValue.value === ''){
@@ -47,6 +49,19 @@ function clearEvent(e){
     tasks.children.remove();
   }
   e.preventDefault();
+}
+
+function filterEvent(e){
+  const filterValue = filterTasks.value.toLowerCase();
+  document.querySelectorAll(".collection-item").forEach(function(task){
+    const textContent = task.firstChild.textContent;
+    if(textContent.toLowerCase().indexOf(filterValue) != -1){
+      task.style.display = 'block';
+    } else {
+      task.style.display = 'none';
+    }
+  })
+
 }
 
 console.log("Success");
